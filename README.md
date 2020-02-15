@@ -22,7 +22,7 @@ The Babelboard project aims to make it simpler to prototype embedded Python syst
 
 As the project develops I will add documentation under the docs directory.
 
-There's currently some documentation for two micro:bit libraries in `docs/microbit/REDAME.md`
+There's currently some documentation for two micro:bit libraries in `docs/microbit/README.md`
 
 The software is licensed under an MIT license.
 
