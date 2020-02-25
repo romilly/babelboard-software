@@ -2,6 +2,7 @@ from microbit import *
 import struct
 from time import sleep
 
+
 class MCP23008:
     IODIR = 0x00
     IPOL = 0x01
@@ -19,8 +20,8 @@ class MCP23008:
 
     def prepare(self):
         self.write(self.IODIR, 0x0F)
-        self.write(self.IPOL, 0x00)# Normal polatiy
-        self.write(self.GPPU, 0x0F) # weak pull-uos
+        self.write(self.IPOL, 0x00) # Normal polarity
+        self.write(self.GPPU, 0x0F) # weak pull-ups
 
     def output(self, val):
         self.write(self.GPIO, val)
