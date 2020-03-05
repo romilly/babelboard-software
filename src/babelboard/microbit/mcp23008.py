@@ -16,7 +16,13 @@ class MCP23008:
     GPIO =  0x09
 
     def __init__(self, addr=None):
+        """
+        Initialise the object and chip.
+
+        :param addr: I2C address (default set below to 0x20)
+        """
         self._addr = addr if addr else 0x20
+        self.ipol(0x000) # set normal polarity
 
     def _write(self, reg, value):
         i2c.write(self._addr,struct.pack('<BB', reg, value))
@@ -26,26 +32,33 @@ class MCP23008:
         return i2c.read(self._addr, 1)
 
     def output(self, val):
+        """
+        set output byte
+        :param val: value to output
+        :return:
+        """
         self._write(self.GPIO, val)
 
     def input(self):
+        """
+        read input byte
+        :return: chip inputs
+        """
         return self._read(self.GPIO)
 
     def direction(self, val):
+        """
+        Set direction of pins.
+
+        0 means pin is an input, 1 is an output
+        Each pin is a bit in val; MSB=P7, lsb=P0
+        :param val:
+        :return:
+        """
         self._write(self.IODIR, val)
 
     def gppu(self, val):
         self._write(self.GPPU, val)
 
-
-def loop():
-    ic = MCP23008()
-    ic.direction(0x00)
-    while True:
-        for i in range(256):
-            ic.output(i)
-            sleep(0.1)
-
-
-if __name__ == '__main__':
-    loop()
+    def ipol(self, val):
+        self._write(self.IPOL, val)
